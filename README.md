@@ -13,4 +13,13 @@
   ```
     stack exec blog clean
     stack exec blog build
+
+    or
+
+    stack exec blog rebuild
+  ```
+
+  - Preview the site and reload on changes
+  ```
+    stack exec blog watch
   ```
