@@ -4,6 +4,9 @@ jobs:
     docker:
       - image: fpco/stack-build:lts
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "5e:f7:5b:72:5f:66:51:03:b9:96:dc:f3:de:26:cf:88"
       - checkout
       - restore_cache:
           name: Restore Cached Dependencies
