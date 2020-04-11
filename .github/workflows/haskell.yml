@@ -15,16 +15,20 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/setup-haskell@v1
       with:
-        ghc-version: '8.8.2'
         stack-version: '2.2'
-    - name: Install dependencies
+    - name: Resolve/Update dependencies
       run: |
-        stack build
-    - name: Run tests
+        stack setup
+        stack build --dependencies-only
+    - name: Build Site
+      run: stack build --pedantic
+    - name: Generate Static Site
+      run: stack exec site build
+    - name: Publish GitHub Pages
       run: |
         stack exec site build
-        git checkout master
+        git checkout -b master
         cp -a _site/ .
         git add -A 
         git commit -m "test"
-        git push origin master
+        git push -u origin master
