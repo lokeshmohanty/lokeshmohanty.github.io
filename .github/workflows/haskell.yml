@@ -27,8 +27,9 @@ jobs:
     - name: Publish GitHub Pages
       run: |
         stack exec site build
-        git checkout -b master
-        cp -a _site/ ./
+        cd _site
+        git init
+        git remote add origin git@github.com:lokesh1197/lokesh1197.github.io.git
         git add -A 
         git commit -m "test"
         git push -u origin master
