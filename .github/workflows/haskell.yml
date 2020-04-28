@@ -2,7 +2,7 @@ name: Haskell CI
 
 on:
   push:
-    branches: [ hakyll ]
+    branches: [ master ]
   pull_request:
     branches: [ hakyll ]
 
@@ -16,14 +16,33 @@ jobs:
     - uses: actions/setup-haskell@v1
       with:
         stack-version: '2.2'
+
+    - name: Setup SSH Keys and known_hosts
+      env:
+        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      run: |
+        mkdir -p ~/.ssh
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+        ssh-add - <<< "${{ secrets.DEPLOY_PRIVATE_KEY }}"
+                    
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.stack
+        key: ${{ runner.os }}-store-${{ hashFiles('stack.yaml.lock') }}-${{ hashFiles('package.yaml') }}
+
     - name: Resolve/Update dependencies
       run: |
         stack setup
         stack build --dependencies-only
+        
     - name: Build Site
       run: stack build --pedantic
+      
     - name: Generate Static Site
       run: stack exec site build
+      
     - name: Publish GitHub Pages
       run: |
         stack exec site build
