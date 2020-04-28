@@ -43,11 +43,16 @@ jobs:
     - name: Generate Static Site
       run: stack exec site build
       
-    - name: Publish GitHub Pages
+    - name: Publish GitHub Pages 
+      env:
+        DEPLOY_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+        GIT_SSH_COMMAND: "ssh -o StrictHostKeyChecking=no"
       run: |
         stack exec site build
         cd _site
         git init
+        eval "$(ssh-agent -s)"
+        ssh-add - <<< "${DEPLOY_KEY}"
         git remote add origin git@github.com:lokesh1197/lokesh1197.github.io.git
         git config --global user.email "actions@github"
         git config --global user.name "Github Actions"
