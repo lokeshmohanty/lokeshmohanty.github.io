@@ -1,4 +1,4 @@
-name: Haskell CI
+name: Hakyll Blog CI
 
 on:
   push:
@@ -13,6 +13,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        
     - uses: actions/setup-haskell@v1
       with:
         stack-version: '2.2'
@@ -26,16 +29,40 @@ jobs:
         ssh-agent -a $SSH_AUTH_SOCK > /dev/null
         ssh-add - <<< "${{ secrets.DEPLOY_PRIVATE_KEY }}"
                     
-    - name: Cache dependencies
+    - name: Cache ~/.stack dependencies
+      id: cache-stack
+      uses: actions/cache@v1
+      with:
+        path: ~/.stack
+        key: stack-home-${{ hashFiles('stack.yaml.lock') }}-${{ hashFiles('package.yaml') }}
+        restore-keys: |
+          stack-home
+    
+    - name: Cache .stack-work
+      id: cache-stack-work
       uses: actions/cache@v1
       with:
         path: .stack-work
-        key: ${{ runner.os }}-store-${{ hashFiles('stack.yaml.lock') }}-${{ hashFiles('package.yaml') }}
+        key: stack-work-${{ github.sha }}
+        restore-keys: |
+          stack-work-${{ github.sha }}
+          stack-work
+    
 
     - name: Resolve/Update dependencies
+      if: steps.cache-stack-local-bin.outputs.cache-hit != 'true'
       run: |
         stack setup
         stack build --dependencies-only
+    
+    - name: Update timestamps from git
+      run: | 
+        git ls-tree -r --name-only HEAD | while read filename; do
+          TS="$(git log -1 --format="%ct" -- ${filename})"
+          echo $TS
+          touch "${filename}" -mt "$(date --date="@$TS" "+%Y%m%d%H%M.%S")"
+          echo "touch \"${filename}\" -mt \"$(date --date="@$TS" "+%Y%m%d%H%M.%S")\""
+        done
         
     - name: Build Site
       run: stack build --pedantic
@@ -58,4 +85,4 @@ jobs:
         git config --global user.name "Github Actions"
         git add -A 
         git commit -m "publish  $GITHUB_SHA on (`date '+%F %T %Z'`) [ci skip]"
-        git push -u origin master
+        git push -u origin master -f
