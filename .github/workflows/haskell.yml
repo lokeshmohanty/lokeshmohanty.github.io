@@ -29,7 +29,7 @@ jobs:
     - name: Cache dependencies
       uses: actions/cache@v1
       with:
-        path: ~/.stack
+        path: .stack-work
         key: ${{ runner.os }}-store-${{ hashFiles('stack.yaml.lock') }}-${{ hashFiles('package.yaml') }}
 
     - name: Resolve/Update dependencies
