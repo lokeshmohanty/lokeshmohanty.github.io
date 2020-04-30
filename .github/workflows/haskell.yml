@@ -13,8 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+    - run: |
+        git fetch --prune --unshallow
         
     - uses: actions/setup-haskell@v1
       with:
@@ -33,9 +33,7 @@ jobs:
       run: | 
         git ls-tree -r --name-only HEAD | while read filename; do
           TS="$(git log -1 --format="%ct" -- ${filename})"
-          echo $TS
           touch "${filename}" -mt "$(date --date="@$TS" "+%Y%m%d%H%M.%S")"
-          echo "touch \"${filename}\" -mt \"$(date --date="@$TS" "+%Y%m%d%H%M.%S")\""
         done
                     
     - name: Cache ~/.stack dependencies
@@ -43,19 +41,18 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.stack
-        key: stack-home-${{ hashFiles('stack.yaml.lock') }}-${{ hashFiles('package.yaml') }}
+        key: ${{ runner.os }}-stack-global-${{ hashFiles('stack.yaml') }}-${{ hashFiles('package.yaml') }}
         restore-keys: |
-          stack-home
+          ${{ runner.os }}-stack-global-
     
     - name: Cache .stack-work
       id: cache-stack-work
       uses: actions/cache@v1
       with:
         path: .stack-work
-        key: stack-work-${{ github.sha }}
+        key: ${{ runner.os }}-stack-work-${{ hashFiles('stack.yaml') }}-${{ hashFiles('package.yaml') }}-${{ '**/*.{hs,rst,html}' }}
         restore-keys: |
-          stack-work-${{ github.sha }}
-          stack-work
+          ${{ runner.os }}-stack-work-
     
 
     - name: Resolve/Update dependencies
