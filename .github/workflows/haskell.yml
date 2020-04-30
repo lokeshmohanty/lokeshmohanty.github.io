@@ -50,7 +50,7 @@ jobs:
       uses: actions/cache@v1
       with:
         path: .stack-work
-        key: ${{ runner.os }}-stack-work-${{ hashFiles('stack.yaml') }}-${{ hashFiles('package.yaml') }}-${{ '**/*.{hs,rst,html}' }}
+        key: ${{ runner.os }}-stack-work-${{ hashFiles('stack.yaml') }}-${{ hashFiles('package.yaml') }}-${{ '**/*.html' }}
         restore-keys: |
           ${{ runner.os }}-stack-work-
     
