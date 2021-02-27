@@ -1,32 +1,21 @@
-cabal-version: 1.12
-
--- This file has been generated from package.yaml by hpack version 0.33.0.
---
--- see: https://github.com/sol/hpack
---
--- hash: 637107214f2d40464669255746b15157825d32a3a33fede88bab2bcc0f320b22
-
-name:           site
-version:        0.1.0.0
-synopsis:       A simple blog with hakyll
-description:    This is a blog with hakyll in github being deployed by circleci
-category:       Web
-homepage:       https://github.com/lokesh1197/lokesh1197.github.io#readme
-author:         Lokesh Mohanty
-maintainer:     lokesh1197@gmail.com
-copyright:      Copyright (c) 2020 Lokesh Mohanty
-license:        BSD3
-license-file:   LICENSE
-build-type:     Simple
-extra-source-files:
-    README.md
+name:                site
+version:             1.0.0.0
+-- synopsis:
+-- description:
+homepage:            https://github.com/lokesh1197/lokesh1197.github.io#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Lokesh Mohanty
+maintainer:          lokesh1197@gmail.com
+copyright:           2021 Lokesh Mohanty
+category:            Web
+build-type:          Simple
+extra-source-files:  README.md
+cabal-version:       >=1.10
 
 executable site
-  main-is: site.hs
-  other-modules:
-      Paths_site
-  ghc-options: -threaded
-  build-depends:
-      base ==4.11.*
-    , hakyll ==4.12.*
+  main-is:          site.hs
   default-language: Haskell2010
+  ghc-options:      -threaded
+  build-depends:    base == 4.*
+                  , hakyll == 4.13.*

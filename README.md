@@ -6,20 +6,24 @@
   ```
     stack new <project-name> hakyll-template
   ```
+   or
+  ```
+    stack exec hakyll-init <project-name>
+  ```
 
 ## Commands
 
-  - Get a clean build (`blog` is the project executable in cabal config file whose default is the project name)
+  - Get a clean build (`site` is the project executable in cabal config file whose default is the project name)
   ```
-    stack exec blog clean
-    stack exec blog build
+    stack exec site clean
+    stack exec site build
 
     or
 
-    stack exec blog rebuild
+    stack exec site rebuild
   ```
 
   - Preview the site and reload on changes
   ```
-    stack exec blog watch
+    stack exec site watch
   ```
