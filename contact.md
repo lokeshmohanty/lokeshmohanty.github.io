@@ -2,4 +2,7 @@
 title: Contact
 ---
 
-You can't contact me.
+- **Full Name**: Lokesh Mohanty
+- **Email**: `lokeshm@iisc.ac.in`
+- **Address**: IISc Bangalore, Karnataka, India - 560012
+- **Languages**: English, Hindi, Odia, Telugu

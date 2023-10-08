@@ -5,17 +5,20 @@ title: Good sites to practice competitive programming
 Here are some of the sites that I like for competitive programming practice.
 
 Beginner Level:
-  [Hackerrank](https://www.hackerrank.com/)
-  , [Hackerearth](https://www.spoj.com/)
-  , [Codechef](https://www.codechef.com/)
+
+  1. [Hackerrank](https://www.hackerrank.com/)
+  2. [Hackerearth](https://www.spoj.com/)
+  3. [Codechef](https://www.codechef.com/)
 
 Advanced Level:
-  [Topcoder](https://www.topcoder.com/community/competitive-programming/)
-  , [Codeforces](http://codeforces.com/)
-  , [SPOJ](https://www.spoj.com/)
 
-Sites with different way to practice
-  [CodingGame](https://www.codingame.com/)
-  , [Codewars](https://www.codewars.com/)
+  1. [Topcoder](https://www.topcoder.com/community/competitive-programming/)
+  2. [Codeforces](http://codeforces.com/)
+  3. [SPOJ](https://www.spoj.com/)
+
+Sites with different ways to practice
+
+  1. [CodingGame](https://www.codingame.com/)
+  2. [Codewars](https://www.codewars.com/)
 
 [Programming Camp Doc](https://docs.google.com/document/d/1_dc3Ifg7Gg1LxhiqMMmE9UbTsXpdRiYh4pKILYG2eA4/) - A doc with selected problems by topic

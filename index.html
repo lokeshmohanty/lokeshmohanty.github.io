@@ -2,11 +2,14 @@
 title: Home
 ---
 
-<header class="page-header">
-    <h2 class="page-title">POSTS</h2>
-</header>
+<!-- <img src="./images/profile-pic.png" style="float:right; margin: 2px;" width="200"/> -->
+<img src="./images/profile-pic.png" width="600"/>
 
-<div id="primary" class="content-area">
-    $partial("templates/post-list.html")$
-    <p>…or you can find more in the <a href="/archive.html">archives</a>.</p>
-</div>
+<p>Welcome to my blog!</p>
+
+<p>I've reproduced a list of recent posts here for your reading pleasure:</p>
+
+<h3>Posts</h3>
+$partial("templates/post-list.html")$
+
+<p>…or you can find more in the <a href="/archive.html">archives</a>.</p>
