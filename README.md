@@ -1,29 +1,13 @@
-# lokesh1197.github.io
+# My website
 
 ## Setup
 
-  - Create new hakyll project
-  ```
-    stack new <project-name> hakyll-template
-  ```
-   or
-  ```
-    stack exec hakyll-init <project-name>
-  ```
+- Run `nix develop` to setup environment
+- Run `just watch` to start a preview server
+- Use the justfile for all commands
 
-## Commands
+## References
 
-  - Get a clean build (`site` is the project executable in cabal config file whose default is the project name)
-  ```
-    stack exec site clean
-    stack exec site build
-
-    or
-
-    stack exec site rebuild
-  ```
-
-  - Preview the site and reload on changes
-  ```
-    stack exec site watch
-  ```
+- [Website Analyzer](https://pagespeed.web.dev/analysis)
+- [jrrom's blog](https://jrrom.com/posts/2026-01-21-hakyll.html)
+- [Hakyll Tutorials](https://jaspervdj.be/hakyll/tutorials.html)
