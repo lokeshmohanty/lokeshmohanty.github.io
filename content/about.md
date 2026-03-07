@@ -1,6 +1,6 @@
----
-title: About
----
++++
+title= "About"
++++
 
 ## Education
 1. PhD Engineering `[2022 - Current]`  
@@ -41,4 +41,4 @@ title: About
 - **Research**: Reinforcement Learning, Explainable AI
 - **Software**: Haskell, Emacs, XMonad, Nix
 
-[Click here to view the full CV](./images/portfolio.pdf) *[to be updated]*
+[Click here to view the full CV](./assets/portfolio.pdf) *[to be updated]*

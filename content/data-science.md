@@ -14,7 +14,7 @@ This data contains statewise gender specific number of persons arrested, charge-
 - **Discharged**: Not enough grounds to lead the proceedings against the accused
 - **Acquitted**: Accused is not guilty of the offence
 
-<img src="./images/ds-dataframe.png" alt="Dataframe" width="600"/>
+<img src="../assets/ds-dataframe.png" alt="Dataframe" width="600"/>
 
 
 ## Bar Plot
@@ -25,7 +25,7 @@ For data with different categories, a bar graph is execellent for displaying the
 
 From the bar plots below we can see that out of the large number of people charge sheeted, most are arrested and out of which majority are acquitted due to lack of evidence. The actual percentage of people actually punished (convicted) is very low.
 
-<img src="./images/ds-barplot.png" alt="Arrested vs Convicted" width="600"/>
+<img src="../assets/ds-barplot.png" alt="Arrested vs Convicted" width="600"/>
 
 ## Box Plot
 
@@ -35,7 +35,7 @@ Box plot displays a summary of a large amount of data in five numbers. These num
 
 From the box plots below we can see that the data is skewed towards the lower quartile and hence the data above the upper quartile can be ignored and can be considered as outliers.
 
-<img src="./images/ds-boxplot.png" alt="Arrested vs Convicted" width="600"/>
+<img src="../assets/ds-boxplot.png" alt="Arrested vs Convicted" width="600"/>
 
 
 ## Pair Plot
@@ -47,4 +47,4 @@ Pair plot is used to understand the best set of features to explain a relationsh
 From the pair plot below we can see that the features with high correlation are (Arrested, Charge sheeted) and (Charge sheeted, Acquitted)
 
 
-<img src="./images/ds-pairplot.png" alt="Pairplot (total)" width="600"/>
+<img src="../assets/ds-pairplot.png" alt="Pairplot (total)" width="600"/>

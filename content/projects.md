@@ -6,9 +6,9 @@ title: Projects
 
 This project involves modelling of the turbulent fluid flow in the human air pathway geometry using Turbulence modelling methods and then coupling them with the Lagrangian approach of tracking particles in that fluid flow to identify the deposition patterns (fractions) in within the geometry.
 
-<!-- ![](./images/siminhale-fluid-flow.png "Fluid Flow") -->
-<img src="./images/siminhale-fluid-flow.png" alt="Fluid Flow" width="600"/>
-<iframe width="600" height="450" src="./images/siminhale-50K.mp4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> 
+<!-- ![](./assets/siminhale-fluid-flow.png "Fluid Flow") -->
+<img src="../assets/siminhale-fluid-flow.png" alt="Fluid Flow" width="600"/>
+<iframe width="600" height="450" src="../assets/siminhale-50K.mp4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> 
 
 ### 2. Semi-autonomous, gesture controlled robot for finding path in a maze.
 

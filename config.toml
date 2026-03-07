@@ -1,0 +1,43 @@
+# The URL the site will be built for
+base_url = "https://lokeshmohanty.github.io"
+title = "Lokesh Mohanty"
+theme = "tanuki"
+compile_sass = true
+build_search_index = true
+generate_feeds = true
+feed_filenames = ["rss.xml"]
+
+taxonomies = [
+    { name = "tags", feed = true},
+]
+
+[markdown]
+
+[markdown.highlighting]
+theme = "catppuccin-mocha"
+
+[extra]
+mode = "blog"
+about.summary = "I am enthusiastic about AI and OpenSource Tools"
+author.name = "Lokesh Mohanty"
+author.avatar = "./assets/profile-pic.png"
+
+[extra.hero]
+title = "Welcome to my site"
+subtitle = "My contribution to the society?"
+
+[[extra.nav]]
+name = "Blog"
+url = "/blog/"
+
+[[extra.nav]]
+name = "About"
+url = "/about/"
+
+[[extra.nav]]
+name = "Projects"
+url = "/projects/"
+
+[[extra.nav]]
+name = "DataScience"
+url = "/data-science/"

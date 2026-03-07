@@ -1,5 +1,6 @@
 ---
 title: Good sites to practice competitive programming
+taxonomies.tags: ["programming"]
 ---
 
 Here are some of the sites that I like for competitive programming practice.
