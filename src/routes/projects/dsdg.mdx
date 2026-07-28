@@ -1,0 +1,52 @@
+---
+title: DSDG
+description: A distributed synthetic data generator that orchestrates multi-turn model conversations into reviewable training candidates for SFT and RLFT.
+---
+
+import PageMeta from "~/components/PageMeta";
+import ProjectHeader from "~/components/ProjectHeader";
+
+<PageMeta {...frontmatter} />
+
+<ProjectHeader slug="dsdg" />
+
+DSDG generates synthetic training data by orchestrating multi-turn AI
+conversations. A *run* pairs seed data with prompt templates, drives a
+user/assistant exchange through an inference endpoint, and materialises the
+result as a candidate record for downstream training.
+
+## What it has to do
+
+- Turn a seed and a prompt template into a complete multi-turn exchange,
+  without a human in the loop.
+- Run many such exchanges at once, across machines, at a throughput that makes
+  a training-scale corpus practical.
+- Survive an inference endpoint that is slow, flaky or briefly gone, without
+  losing work already done.
+- Keep every run inspectable while it is still running, not only after it ends.
+- Produce candidates that a reviewer can accept or reject on evidence — the
+  trajectory that produced a record is part of the record.
+
+## Shape of the system
+
+A run moves through an explicit state machine: created, queued, picked up by an
+orchestrator, driven turn by turn, then either materialised as a candidate or
+recorded as a failure with its error history. Commands and status events travel
+over Kafka, so the API that accepts a run and the worker that executes it scale
+independently.
+
+Storage is split by access pattern. Live conversation state — the turns as they
+happen — goes to a wide-column store with a short TTL, which is what makes a run
+watchable in flight. Durable records — runs, candidates, prompts, seed data,
+failures — go to SQL, where they can be queried and reviewed later.
+
+A circuit breaker sits in front of the inference endpoint, and tool calls
+execute under a max-rounds guard so a confused model cannot spin forever.
+
+## My part
+
+- Pre-trained LLMs on TPU using MaxText (JAX).
+- Built the distributed generation framework over FastAPI, Kafka and
+  YugabyteDB, with Prometheus and Grafana for observability.
+- Ran supervised (SFT) and reinforcement (RLFT) fine-tuning on the output, and
+  served inference with vLLM.

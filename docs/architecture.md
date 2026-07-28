@@ -18,6 +18,17 @@ MDX files under `src/routes/` **are** routes — `extensions: ["mdx"]` in
 | `src/routes/blog/2021-02-27-programming.mdx` | `/blog/2021-02-27-programming` |
 | `src/routes/blog/index.tsx` | `/blog` |
 | `src/routes/tags/[tag].tsx` | `/tags/:tag` |
+| `src/routes/projects/caesar.mdx` | `/projects/caesar` |
+
+### Projects
+
+`/projects` is a card grid driven by `src/lib/projects.ts`, not by MDX. The
+module exports `featured` (a detail page at `/projects/<slug>`, a 3:2 cover, and
+a card) and `other` (smaller work, rendered as a plain list). Each detail page
+is an MDX route that renders `<ProjectHeader slug="…" />`, which reads the
+title, cover, period, affiliation and tags back out of the same module — the
+card and the page it links to cannot drift apart. See `docs/authoring.md` for
+how to add one.
 
 ### The MDX pipeline
 

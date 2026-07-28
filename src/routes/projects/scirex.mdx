@@ -1,0 +1,66 @@
+---
+title: SciREX
+description: An open-source scientific ML framework in JAX, built jointly by the AiREX Lab at IISc and ZenteiQ.
+---
+
+import PageMeta from "~/components/PageMeta";
+import ProjectHeader from "~/components/ProjectHeader";
+
+<PageMeta {...frontmatter} />
+
+<ProjectHeader slug="scirex" />
+
+SciREX (Scientific Research and Engineering eXcellence) is an open-source
+scientific AI and machine-learning framework for researchers and engineers,
+developed jointly by [ZenteiQ Aitech Innovations](https://zenteiq.ai/) and the
+[AiREX Lab](https://airexlab.cds.iisc.ac.in/) at the Indian Institute of
+Science, Bangalore. It aims at the gap between a method as published and a
+method you can actually run, without giving up mathematical rigour or
+computational efficiency.
+
+## Design goals
+
+- **Research-first.** Built around scientific computing and research workflows
+  rather than retrofitted from a production ML stack.
+- **Mathematically honest.** Emphasis on correctness and theoretical grounding
+  over convenience.
+- **Fast where it matters.** Efficient implementations with GPU acceleration.
+- **Reproducible.** Experiment tracking and result reproduction are part of the
+  framework, not an afterthought.
+- **Publication-ready output.** Scientific visualisation built in.
+
+## Modules
+
+- **Diffusion** — noise schedules and diffusion samplers.
+- **Training** — utilities for optimisation loops and model training.
+- **Transformers** — modular Transformer and U-Net architectures.
+- **Experimental** — research-focused and in-flight implementations.
+
+## Using it
+
+```bash
+pip install scirex
+```
+
+```python
+import jax.numpy as jnp
+from flax import nnx as nn
+from scirex.training import Trainer
+
+model = nn.Linear(10, 2, rngs=nn.Rngs(0))
+
+def loss_fn(model, batch):
+    x, y = batch
+    logits = model(x)
+    return jnp.mean((logits - y) ** 2), logits
+
+trainer = Trainer(
+    model=model,
+    optimizer=nn.Optimizer(model, optax.adam(1e-3)),
+    loss_fn=loss_fn,
+)
+trainer.train(batch_iterator, num_epochs=5)
+```
+
+Apache 2.0 licensed. Source on [GitHub](https://github.com/zenoxml/SciREX),
+documentation at [scirex.org](https://scirex.org/docs/).

@@ -14,7 +14,6 @@ export const site = {
     { name: "Blog", href: "/blog" },
     { name: "Projects", href: "/projects" },
     { name: "Publications", href: "/publications" },
-    { name: "Data Science", href: "/data-science" },
     { name: "About", href: "/about" },
   ],
   social: {

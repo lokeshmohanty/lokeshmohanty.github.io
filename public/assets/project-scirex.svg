@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" role="img" aria-label="Computational mesh motif">
+  <defs>
+    <linearGradient id="scirex-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#151922" />
+      <stop offset="1" stop-color="#1e2534" />
+    </linearGradient>
+    <linearGradient id="scirex-field" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#4f7ddb" stop-opacity="0.35" />
+      <stop offset="1" stop-color="#6f9dff" stop-opacity="0.05" />
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="400" fill="url(#scirex-bg)" />
+
+  <!-- Refining triangular mesh: coarse on the left, fine on the right. -->
+  <g stroke="#3d4a63" fill="none" stroke-width="1">
+    <path d="M60 330L170 110L280 330Z" />
+    <path d="M170 110L280 330L390 110" />
+    <path d="M280 330L390 110L500 330Z" />
+    <path d="M60 330L500 330" />
+    <path d="M115 220L225 220M335 220L445 220" stroke-opacity="0.7" />
+    <path d="M225 220L280 330M335 220L280 330" stroke-opacity="0.7" />
+    <path d="M362 165L417 275M390 110L445 220" stroke-opacity="0.45" />
+    <path d="M390 165L472 275" stroke-opacity="0.3" />
+  </g>
+
+  <path d="M170 110L280 330L390 110Z" fill="url(#scirex-field)" />
+
+  <!-- Mesh vertices. -->
+  <g fill="#a9c6ff">
+    <circle cx="60" cy="330" r="4.5" />
+    <circle cx="170" cy="110" r="4.5" />
+    <circle cx="280" cy="330" r="4.5" />
+    <circle cx="390" cy="110" r="4.5" />
+    <circle cx="500" cy="330" r="4.5" />
+  </g>
+  <g fill="#6f9dff" fill-opacity="0.75">
+    <circle cx="115" cy="220" r="3" />
+    <circle cx="225" cy="220" r="3" />
+    <circle cx="335" cy="220" r="3" />
+    <circle cx="445" cy="220" r="3" />
+    <circle cx="362" cy="165" r="2.5" />
+    <circle cx="417" cy="275" r="2.5" />
+  </g>
+
+  <!-- Solution curve over the mesh. -->
+  <path d="M60 300C150 300 180 150 280 150S430 300 500 296"
+        fill="none" stroke="#a9c6ff" stroke-width="2.5" stroke-linecap="round" />
+</svg>

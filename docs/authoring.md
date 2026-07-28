@@ -61,6 +61,27 @@ Then, for a top-level page, do both of these:
 
 Step 2 matters: `crawlLinks` only finds pages that something links to.
 
+## A new project
+
+Projects are data plus a page, not just a page.
+
+1. Add an entry to `featured` in `src/lib/projects.ts` — `slug`, `title`,
+   `tagline`, `blurb`, `cover`, `affiliation`, `period`, `tags`. This alone
+   makes the card appear on `/projects`.
+2. Add `src/routes/projects/<slug>.mdx` with `PageMeta` and
+   `<ProjectHeader slug="<slug>" />`. The header reads title, cover, period,
+   affiliation and tags back out of `projects.ts`, so a detail page never
+   restates what the card already says.
+3. Add `/projects/<slug>` to `prerender.routes` in `app.config.ts` and to
+   `REQUIRED` in `scripts/check-build.mjs`.
+
+Covers are 3:2. The generated ones are hand-written SVGs in `public/assets/`
+on a `#151922 → #1e2534` panel with `#4f7ddb`/`#a9c6ff` linework; a real
+render should be composited onto the same panel so the grid reads as one set.
+
+Smaller work that does not warrant a page goes in `other` in the same module
+and renders as a plain list under *Also* — no slug, no cover, no route.
+
 ## What you can write
 
 Standard GFM — tables, task lists, strikethrough, footnotes — plus:

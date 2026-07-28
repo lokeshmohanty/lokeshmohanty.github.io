@@ -1,0 +1,24 @@
+---
+title: SimInhale
+description: Particle deposition in the human airway, modelled with turbulence simulation and Lagrangian particle tracking.
+---
+
+import PageMeta from "~/components/PageMeta";
+import ProjectHeader from "~/components/ProjectHeader";
+
+<PageMeta {...frontmatter} />
+
+<ProjectHeader slug="siminhale" />
+
+Models turbulent fluid flow through human airway geometry, then couples it with
+a Lagrangian particle-tracking approach to identify deposition patterns and
+deposition fractions within the geometry.
+
+Flow simulation runs on ParMooN, a finite-element PDE solver, parallelised with
+OpenMP and accelerated on the GPU with CUDA.
+
+{/* The still doubles as the video poster, so it is not shown separately. */}
+<video controls preload="none" width="600" poster="/assets/siminhale-fluid-flow.png">
+  <source src="/assets/siminhale-50K.mp4" type="video/mp4" />
+  Your browser does not support embedded video.
+</video>

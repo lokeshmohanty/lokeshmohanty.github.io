@@ -1,0 +1,83 @@
+---
+title: ExpMan
+description: A high-performance experiment manager written in Rust, with non-blocking Python logging, a live dashboard and a single-binary CLI.
+---
+
+import PageMeta from "~/components/PageMeta";
+import ProjectHeader from "~/components/ProjectHeader";
+
+<PageMeta {...frontmatter} />
+
+<ProjectHeader slug="expman" />
+
+An experiment manager written in Rust, with a Python wrapper for non-blocking
+logging, a live web dashboard, and a CLI. The point is that tracking a run
+should cost the training loop nothing.
+
+## Features
+
+- **Non-blocking Python logging** — `log_vector()` is a ~100 ns channel send, so
+  it never stalls your training loop.
+- **Live dashboard** — SSE-powered real-time metric streaming, run comparison
+  charts, and an artifact browser.
+- **Single binary** — CLI and web server ship as one `exp` binary; the server
+  needs no Python runtime.
+- **Efficient storage** — batched Arrow/Parquet writes rather than a
+  read-concat-write per step.
+- **TensorBoard interoperability** — a drop-in `SummaryWriter`, plus import and
+  export both ways.
+- **Reproducible dev environment** — `nix develop`, with a Cachix cache.
+
+## Installing
+
+```bash
+cargo install expman      # Rust
+pip install expman-rs     # Python
+nix run github:lokeshmohanty/expman-rs
+```
+
+## Logging a run
+
+```python
+import expman as exp
+
+exp.init("resnet_cifar10")
+exp.log_params({"lr": 0.001})
+exp.log_vector({"loss": 0.5}, step=0)
+```
+
+Or scoped, which is the recommended form:
+
+```python
+from expman import Experiment
+
+with Experiment("resnet_cifar10") as exp:
+    exp.log_vector({"loss": 0.5}, step=0)
+```
+
+The same engine is available directly in Rust:
+
+```rust
+use expman::{ExperimentConfig, LoggingEngine, RunStatus};
+
+let config = ExperimentConfig::new("my_rust_exp", "./experiments");
+let engine = LoggingEngine::new(config)?;
+
+engine.log_vector([("loss".to_string(), 0.5.into())].into(), Some(0));
+engine.close(RunStatus::Finished);
+```
+
+## Dashboard and CLI
+
+```bash
+exp serve ./experiments             # dashboard on :8000
+exp list ./experiments              # list experiments
+exp inspect ./experiments/resnet/runs/20240101_120000
+exp clean resnet --keep 5 --force
+exp export ./experiments/resnet/runs/20240101_120000 --format csv
+```
+
+MIT licensed. Source on [GitHub](https://github.com/lokeshmohanty/expman-rs),
+packages on [crates.io](https://crates.io/crates/expman) and
+[PyPI](https://pypi.org/project/expman-rs/), documentation at
+[lokeshmohanty.github.io/expman-rs](https://lokeshmohanty.github.io/expman-rs).

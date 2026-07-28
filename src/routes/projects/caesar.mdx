@@ -1,0 +1,51 @@
+---
+title: CAESAR
+description: Requirements for a machine-learning framework for electronic support measures — emitter detection, classification, localisation and multi-sensor fusion.
+---
+
+import PageMeta from "~/components/PageMeta";
+import ProjectHeader from "~/components/ProjectHeader";
+
+<PageMeta {...frontmatter} />
+
+<ProjectHeader slug="caesar" />
+
+A collaboration with the Defence R&D Organisation on the machine-learning side
+of electronic support measures. What follows is the requirement set the work was
+scoped against; the implementation is not described here.
+
+## Operational requirements
+
+Two broad requirements drive everything else:
+
+1. **Detect enemy radars as early as possible.**
+2. **Deny them a detection** — jam them, or otherwise avoid being seen.
+
+## Derived requirements
+
+The broad pair decomposes into a chain, each stage feeding the next:
+
+1. **Detection** of radar pulses out of a noisy mixed-signal environment.
+2. **Clustering** of those pulses, separating interleaved sources.
+3. **Track generation**, deriving further parameters from each cluster.
+4. **Classification** of the radar behind each track.
+5. **Localisation** of that radar, accurately enough to act on.
+6. **Jamming**, by noise or deception, once a threat is identified.
+
+## Engineering constraints
+
+- **Real time.** The pipeline runs on an embedded system under an RTOS — a
+  correct answer that arrives late is a wrong answer.
+- **SWaP.** Size, weight and power are fixed by the airframe, which bounds how
+  much computation the models may ask for.
+- **Certification.** Airborne software follows DO-178C, so the design has to
+  stay auditable rather than merely accurate.
+
+## Workstreams
+
+- Signal clustering over emitters
+- Emitter classification
+- Multi-sensor data fusion (MSDF)
+- Target detection and tracking
+- Voice analysis
+- A pilot-facing dashboard presenting the fused picture
