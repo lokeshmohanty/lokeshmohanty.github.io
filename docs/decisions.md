@@ -59,6 +59,34 @@ id first.
 The content generator now writes `public/search-index.json` directly. Simpler,
 and it keeps post bodies out of the client bundles.
 
+## The search index is fetched in `onMount`, not `createResource`
+
+`createResource` also runs during SSR, where `fetch("/search-index.json")` is
+invalid — Node needs an absolute URL. The resulting error is serialised into the
+prerendered page and rethrown during hydration, which took down the entire
+`/search` route with *Uncaught Client Exception*.
+
+The prerendered HTML looked perfectly healthy, so `check-build.mjs` did not
+catch this; only loading the page in a browser did. `onMount` runs on the client
+only, which is what this needs.
+
+## `404.html` is copied to the output root
+
+GitHub Pages serves `/404.html` for unknown paths, but the prerenderer emits the
+route as `404/index.html`. Without the copy in `scripts/finalize-output.mjs`,
+visitors to a bad URL get GitHub's default page rather than the site's.
+
+## Shiki backgrounds go on the `<pre>`, not the token spans
+
+Setting `background-color` on `.shiki span` as well as `.shiki` paints a ragged
+stripe behind each line, because the spans only cover their own text. Combined
+with `prose-pre:bg-transparent` — which left the `<pre>` itself unpainted — code
+blocks rendered as uneven bands. The background now sits on `pre.shiki` alone.
+
+Both this rule and the heading-anchor rule are deliberately **unlayered**: they
+must outrank Tailwind Typography's own utilities, and in the CSS cascade
+unlayered styles beat layered ones.
+
 ## `check-build.mjs` exists because `failOnError` is not enough
 
 Nitro's `prerender.failOnError` only catches non-2xx responses. A component that

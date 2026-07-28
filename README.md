@@ -59,18 +59,23 @@ to `prerender.routes` in `app.config.ts`.
 
 ## How the build works
 
-`npm run build` runs three steps:
+`npm run build` runs four steps:
 
 1. `scripts/generate-content.mjs` reads `src/routes/blog/*.mdx` and writes
    `src/lib/posts.generated.json` (listing metadata) and
    `public/search-index.json` (full-text search index). Both are gitignored.
 2. `vinxi build` prerenders every route to static HTML in `.output/public`.
-3. `scripts/check-build.mjs` verifies the output — no page rendered as an SSR
+3. `scripts/finalize-output.mjs` copies `404/index.html` to `404.html`, which is
+   what GitHub Pages serves for unknown paths.
+4. `scripts/check-build.mjs` verifies the output — no page rendered as an SSR
    error, every page has a title, and every referenced local asset exists.
 
-Step 3 exists because Nitro's `failOnError` only catches non-2xx responses: a
+Step 4 exists because Nitro's `failOnError` only catches non-2xx responses: a
 component that throws during SSR still "succeeds", producing a page whose body
 reads *500 | Internal Server Error*.
+
+Note that these checks read static HTML only, so they cannot catch client-side
+runtime errors. Open changed pages in a browser and check the console too.
 
 ## Deployment
 

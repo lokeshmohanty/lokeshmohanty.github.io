@@ -48,5 +48,7 @@ target — Pages now serves the GitHub Actions artifact.
 ## Honest gaps
 
 - No automated tests beyond `check-build.mjs` and `tsc`; there is no test runner.
-- The design has been verified from the prerendered HTML and generated CSS, but
-  not yet in a real browser.
+- Browser verification is manual. A visual pass on 2026-07-28 covered every
+  route in light and dark at 1280px and 390px, but nothing guards against
+  regressions — `check-build.mjs` reads static HTML and cannot see client-side
+  failures.

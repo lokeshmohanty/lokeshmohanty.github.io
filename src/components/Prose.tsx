@@ -9,7 +9,6 @@ export default function Prose(props: { children: JSX.Element; class?: string }) 
         prose-a:text-accent prose-a:no-underline hover:prose-a:underline
         prose-a:underline-offset-4 dark:prose-a:text-accent-dark
         prose-code:before:content-none prose-code:after:content-none
-        prose-pre:bg-transparent prose-pre:p-0
         prose-img:rounded-lg ${props.class ?? ""}`}
     >
       {props.children}

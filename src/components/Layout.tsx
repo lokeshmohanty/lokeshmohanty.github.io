@@ -28,14 +28,18 @@ export default function Layout(props: { children: JSX.Element }) {
   return (
     <div class="flex min-h-screen flex-col">
       <header class="sticky top-0 z-40 border-b border-rule bg-paper/85 backdrop-blur-sm dark:border-rule-dark dark:bg-paper-dark/85">
+        {/* Ordering keeps the toggle beside the title on narrow screens, with
+            the nav reflowing onto its own row instead of stranding the toggle. */}
         <div class="mx-auto flex max-w-3xl flex-wrap items-center gap-x-6 gap-y-2 px-6 py-4">
-          <A href="/" class="font-serif text-lg font-semibold tracking-tight">
+          <A href="/" class="order-1 mr-auto font-serif text-lg font-semibold tracking-tight">
             {site.title}
           </A>
-          <nav class="ml-auto flex flex-wrap items-center gap-x-5 gap-y-1 text-sm">
+          <nav class="order-3 flex w-full flex-wrap items-center gap-x-5 gap-y-1 text-sm sm:order-2 sm:w-auto">
             <For each={site.nav}>{(item) => <NavLink href={item.href} name={item.name} />}</For>
           </nav>
-          <ThemeToggle />
+          <span class="order-2 -mr-2 sm:order-3 sm:mr-0">
+            <ThemeToggle />
+          </span>
         </div>
       </header>
 

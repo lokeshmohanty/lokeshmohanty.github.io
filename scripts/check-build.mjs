@@ -24,6 +24,8 @@ const REQUIRED = [
   "tags/index.html",
   "search/index.html",
   "404/index.html",
+  // GitHub Pages serves this for unknown paths; written by finalize-output.mjs.
+  "404.html",
   "rss.xml",
   "search-index.json",
   ".nojekyll",

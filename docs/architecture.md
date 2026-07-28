@@ -76,13 +76,23 @@ the content generator and fetched by `/search` at runtime.
 
 ## Build verification
 
-`scripts/check-build.mjs` runs as `postbuild` and fails the build on: a missing
-required route, a page whose body contains an SSR error, a page with no
-`<title>`, or an HTML reference to a local asset that isn't in the output.
+`postbuild` runs two scripts:
 
-Nitro's `failOnError` does not cover this: a component that throws during SSR
-still returns HTTP 200, with `500 | Internal Server Error` as the page body.
-That shipped silently once during the migration, which is why the check exists.
+`scripts/finalize-output.mjs` copies `404/index.html` to `404.html`, which is
+what GitHub Pages serves for unknown paths.
+
+`scripts/check-build.mjs` then fails the build on: a missing required route, a
+page whose body contains an SSR error, a page with no `<title>`, or an HTML
+reference to a local asset that isn't in the output.
+
+Nitro's `failOnError` does not cover the SSR case: a component that throws
+during SSR still returns HTTP 200, with `500 | Internal Server Error` as the
+page body. That shipped silently once during the migration.
+
+**These checks only inspect static HTML.** They cannot see client-side runtime
+failures — a hydration error takes a route down while leaving perfectly healthy
+markup on disk (this happened to `/search`; see `docs/decisions.md`). Load
+changed pages in a browser and check the console before shipping.
 
 ## Styling
 

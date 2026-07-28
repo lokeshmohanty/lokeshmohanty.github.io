@@ -1,5 +1,5 @@
 import { A } from "@solidjs/router";
-import { createMemo, createResource, createSignal, For, Show } from "solid-js";
+import { createMemo, createSignal, For, onMount, Show } from "solid-js";
 
 import PageMeta from "~/components/PageMeta";
 import { formatDate } from "~/lib/content";
@@ -13,12 +13,6 @@ interface IndexedPost {
   body: string;
 }
 
-async function fetchIndex(): Promise<IndexedPost[]> {
-  const res = await fetch("/search-index.json");
-  if (!res.ok) throw new Error(`search index unavailable (${res.status})`);
-  return res.json();
-}
-
 /** Snippet of `body` around the first match, for result context. */
 function snippet(body: string, term: string): string {
   const at = body.toLowerCase().indexOf(term);
@@ -29,13 +23,28 @@ function snippet(body: string, term: string): string {
 
 export default function Search() {
   const [query, setQuery] = createSignal("");
-  const [index] = createResource(fetchIndex);
+  const [index, setIndex] = createSignal<IndexedPost[]>([]);
+  const [failed, setFailed] = createSignal(false);
+
+  // Fetched in onMount rather than createResource: a resource also runs during
+  // SSR, where the relative URL is not valid input to Node's fetch. That error
+  // is serialised into the page and rethrown on hydration, killing the route.
+  onMount(async () => {
+    try {
+      const res = await fetch("/search-index.json");
+      if (!res.ok) throw new Error(`search index unavailable (${res.status})`);
+      setIndex(await res.json());
+    } catch (err) {
+      console.error("[search] could not load the index", err);
+      setFailed(true);
+    }
+  });
 
   const results = createMemo(() => {
     const term = query().trim().toLowerCase();
     if (term.length < 2) return [];
 
-    return (index() ?? [])
+    return index()
       .map((post) => {
         const haystack = `${post.title} ${post.tags.join(" ")} ${post.body}`.toLowerCase();
         if (!haystack.includes(term)) return null;
@@ -67,7 +76,7 @@ export default function Search() {
           class="w-full rounded-lg border border-rule bg-transparent px-4 py-2.5 text-base outline-none transition-colors placeholder:text-muted focus:border-accent dark:border-rule-dark dark:placeholder:text-muted-dark dark:focus:border-accent-dark"
         />
 
-        <Show when={index.error}>
+        <Show when={failed()}>
           <p class="mt-4 text-sm text-muted dark:text-muted-dark">
             Could not load the search index.
           </p>

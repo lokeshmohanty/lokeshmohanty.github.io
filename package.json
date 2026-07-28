@@ -10,7 +10,7 @@
     "dev": "vinxi dev",
     "prebuild": "npm run content",
     "build": "vinxi build",
-    "postbuild": "node scripts/check-build.mjs",
+    "postbuild": "node scripts/finalize-output.mjs && node scripts/check-build.mjs",
     "pretypecheck": "npm run content",
     "typecheck": "tsc --noEmit",
     "preview": "vinxi start",

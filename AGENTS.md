@@ -40,7 +40,12 @@ These are load-bearing; `docs/decisions.md` has the full reasoning.
 4. **Don't read post frontmatter via `import.meta.glob`** in app code; use the
    generated `src/lib/posts.generated.json`.
 5. **A green build is not proof.** Nitro reports success for pages that threw
-   during SSR; `scripts/check-build.mjs` is what actually catches it.
+   during SSR; `scripts/check-build.mjs` is what actually catches it. And that
+   check reads static HTML only — client-side runtime and hydration errors leave
+   healthy-looking markup behind, so load changed pages in a browser too.
+6. **Don't `fetch` a relative URL in `createResource`.** It runs during SSR,
+   where Node rejects the URL; the error is serialised and rethrown on
+   hydration, killing the route. Use `onMount` for client-only fetches.
 
 ## Project skills
 
