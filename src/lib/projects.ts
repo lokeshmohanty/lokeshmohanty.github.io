@@ -63,7 +63,7 @@ export const featured: readonly FeaturedProject[] = [
     blurb:
       "An open-source scientific ML framework in JAX, built jointly by the AiREX Lab at IISc and ZenteiQ, covering diffusion, training and transformer modules with reproducibility built in.",
     cover: "/assets/project-scirex.svg",
-    affiliation: "AiREX Lab, IISc · ZenteiQ AiTech Innovations",
+    affiliation: "AiREX Lab, IISc · ZenteiQ · open source (Apache 2.0)",
     period: "2024 – present",
     tags: ["Open source", "JAX", "Scientific ML"],
   },
