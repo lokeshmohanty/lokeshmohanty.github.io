@@ -31,7 +31,7 @@ export default function Home() {
           height="640"
           class="aspect-square w-36 shrink-0 rounded-2xl object-cover ring-1 ring-rule sm:w-44 dark:ring-rule-dark"
         />
-        <div class="sm:ml-auto sm:text-right">
+        <div class="sm:flex-1 sm:text-center">
           <h1 class="font-display text-4xl font-semibold tracking-tight text-balance">
             {site.author.name}
           </h1>

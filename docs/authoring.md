@@ -65,9 +65,11 @@ Step 2 matters: `crawlLinks` only finds pages that something links to.
 
 Projects are data plus a page, not just a page.
 
-1. Add an entry to `featured` in `src/lib/projects.ts` — `slug`, `title`,
-   `tagline`, `blurb`, `cover`, `affiliation`, `period`, `tags`. This alone
-   makes the card appear on `/projects`.
+1. Add an entry to `research` or `personal` in `src/lib/projects.ts` — `slug`,
+   `title`, `tagline`, `blurb`, `cover`, `affiliation`, `period`, `tags`. Work
+   done with a lab, a company or a collaborator goes in `research`; work that is
+   yours alone goes in `personal`. This alone makes the card appear on
+   `/projects`, under that group's heading.
 2. Add `src/routes/projects/<slug>.mdx` with `PageMeta` and
    `<ProjectHeader slug="<slug>" />`. The header reads title, cover, period,
    affiliation and tags back out of `projects.ts`, so a detail page never

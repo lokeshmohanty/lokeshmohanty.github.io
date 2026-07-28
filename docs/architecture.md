@@ -23,8 +23,11 @@ MDX files under `src/routes/` **are** routes — `extensions: ["mdx"]` in
 ### Projects
 
 `/projects` is a card grid driven by `src/lib/projects.ts`, not by MDX. The
-module exports `featured` (a detail page at `/projects/<slug>`, a 3:2 cover, and
-a card) and `other` (smaller work, rendered as a plain list). Each detail page
+module exports two card groups — `research` (work with a lab, company or
+collaborator) and `personal` (work that is Lokesh's alone), each entry having a
+3:2 cover and a detail page at `/projects/<slug>` — plus `other`, smaller work
+rendered as a plain list. `featured` is the concatenation of the two card
+groups, used to resolve a slug back to its entry. Each detail page
 is an MDX route that renders `<ProjectHeader slug="…" />`, which reads the
 title, cover, period, affiliation and tags back out of the same module — the
 card and the page it links to cannot drift apart. See `docs/authoring.md` for

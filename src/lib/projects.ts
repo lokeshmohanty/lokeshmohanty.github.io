@@ -1,9 +1,14 @@
 /**
  * Project listing for `/projects`.
  *
- * `featured` entries have a detail page at `/projects/<slug>` and a cover
- * image; `other` entries are smaller pieces of work that a full page would
- * only pad out, so they render as a plain list.
+ * Card projects are grouped by who the work was for: `research` covers work
+ * done with a lab, a company or a collaborator, `personal` covers work that is
+ * mine alone. Both render as cards and have a detail page at
+ * `/projects/<slug>`; `featured` is their concatenation, used to resolve a slug
+ * back to its entry.
+ *
+ * `other` entries are smaller pieces of work that a full page would only pad
+ * out, so they render as a plain list.
  */
 
 export type FeaturedProject = {
@@ -22,7 +27,7 @@ export type SmallProject = {
   blurb: string;
 };
 
-export const featured: readonly FeaturedProject[] = [
+export const research: readonly FeaturedProject[] = [
   {
     slug: "dsdg",
     title: "DSDG",
@@ -44,17 +49,6 @@ export const featured: readonly FeaturedProject[] = [
     affiliation: "Defence R&D Organisation (DRDO) — collaboration",
     period: "Mar 2024 – Mar 2026",
     tags: ["Electronic warfare", "Sensor fusion", "Real-time ML"],
-  },
-  {
-    slug: "expman",
-    title: "ExpMan",
-    tagline: "Experiment manager written in Rust",
-    blurb:
-      "A high-performance experiment tracker: logging that never blocks your training loop, a live SSE dashboard for comparing runs, and a single binary that serves it all. Published on crates.io and PyPI.",
-    cover: "/assets/project-expman.jpg",
-    affiliation: "Personal · open source (MIT)",
-    period: "Feb 2026 – present",
-    tags: ["Rust", "Open source", "Tooling"],
   },
   {
     slug: "scirex",
@@ -79,6 +73,23 @@ export const featured: readonly FeaturedProject[] = [
     tags: ["CFD", "CUDA", "Turbulence modelling"],
   },
 ];
+
+export const personal: readonly FeaturedProject[] = [
+  {
+    slug: "expman",
+    title: "ExpMan",
+    tagline: "Experiment manager written in Rust",
+    blurb:
+      "A high-performance experiment tracker: logging that never blocks your training loop, a live SSE dashboard for comparing runs, and a single binary that serves it all. Published on crates.io and PyPI.",
+    cover: "/assets/project-expman.jpg",
+    affiliation: "Open source (MIT)",
+    period: "Feb 2026 – present",
+    tags: ["Rust", "Open source", "Tooling"],
+  },
+];
+
+/** Every card project, for resolving a slug on a detail page. */
+export const featured: readonly FeaturedProject[] = [...research, ...personal];
 
 export const other: readonly SmallProject[] = [
   {
