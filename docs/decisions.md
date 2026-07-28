@@ -70,6 +70,22 @@ The prerendered HTML looked perfectly healthy, so `check-build.mjs` did not
 catch this; only loading the page in a browser did. `onMount` runs on the client
 only, which is what this needs.
 
+## Head tags go through `@solidjs/meta` components
+
+The RSS autodiscovery tag was originally a lowercase `<link rel="alternate">`
+inside the router root. `@solidjs/meta` only hoists its own components into
+`<head>`; a plain `link` element renders wherever it sits — in this case inside
+`<div id="app">`. The feed was reachable at `/rss.xml` and valid, but no reader
+or browser extension could discover it from the site URL, which is what "RSS
+not working" looked like from the outside.
+
+`check-build.mjs` now asserts the autodiscovery tag appears before `</head>` on
+every page, and that `rss.xml` is well-formed with at least one item. The same
+trap applies to `<meta>`: use `<Meta>`.
+
+Note that `src/entry-server.tsx` is exempt — the tags there are written directly
+into the document template's `<head>`, so plain elements are correct.
+
 ## `404.html` is copied to the output root
 
 GitHub Pages serves `/404.html` for unknown paths, but the prerenderer emits the

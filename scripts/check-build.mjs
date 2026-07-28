@@ -77,6 +77,21 @@ for (const file of htmlFiles) {
   if (!html.includes('<div id="app">') || html.length < 2000) {
     errors.push(`${rel}: suspiciously small or missing app root`);
   }
+
+  // Feed autodiscovery only works from <head>. A plain <link> renders in the
+  // body instead of being hoisted, which silently breaks it.
+  const head = html.slice(0, html.indexOf("</head>"));
+  if (!/rel="alternate"[^>]*application\/rss\+xml|application\/rss\+xml[^>]*rel="alternate"/.test(head)) {
+    errors.push(`${rel}: RSS autodiscovery <link> is missing from <head>`);
+  }
+}
+
+// 2b. The feed itself is well-formed and has at least one item.
+const feed = await readFile(join(OUT, "rss.xml"), "utf8").catch(() => "");
+if (!feed.includes("<rss") || !feed.includes("<channel>")) {
+  errors.push("rss.xml: not a well-formed RSS document");
+} else if (!feed.includes("<item>")) {
+  errors.push("rss.xml: contains no items");
 }
 
 // 3. Local assets referenced by HTML actually exist.

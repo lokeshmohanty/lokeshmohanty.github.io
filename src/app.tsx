@@ -1,4 +1,4 @@
-import { MetaProvider, Meta, Title } from "@solidjs/meta";
+import { Link, MetaProvider, Meta, Title } from "@solidjs/meta";
 import { Router } from "@solidjs/router";
 import { FileRoutes } from "@solidjs/start/router";
 import { Suspense } from "solid-js";
@@ -18,7 +18,14 @@ export default function App() {
           <Title>{site.title}</Title>
           <Meta name="description" content={site.description} />
           <Meta name="author" content={site.author.name} />
-          <link rel="alternate" type="application/rss+xml" title={site.title} href="/rss.xml" />
+          {/* Must be @solidjs/meta's <Link>, not a plain <link>: only the
+              component is hoisted into <head>, where feed autodiscovery looks. */}
+          <Link
+            rel="alternate"
+            type="application/rss+xml"
+            title={site.title}
+            href={`${site.url}/rss.xml`}
+          />
           <MDXProvider components={mdxComponents}>
             <Layout>
               <Suspense>{props.children}</Suspense>

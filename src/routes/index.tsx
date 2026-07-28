@@ -7,7 +7,7 @@ import { posts } from "~/lib/content";
 import { site } from "~/lib/site";
 
 const interests = [
-  "End-to-end planning for autonomous driving",
+  "End-to-end planning for autonomous systems",
   "Reinforcement learning",
   "Diffusion models for planning",
   "Multi-agent systems and game theory",
@@ -35,10 +35,8 @@ export default function Home() {
         <p class="mt-4 text-lg leading-relaxed text-muted dark:text-muted-dark text-pretty">
           PhD researcher at {site.author.affiliation} working on{" "}
           <strong class="font-medium text-ink dark:text-ink-dark">
-            end-to-end planning for autonomous driving
+            end-to-end planning for autonomous systems
           </strong>
-          . Currently a Research Intern at Zenteiq, building India's first scientific
-          foundation model.
         </p>
       </section>
 

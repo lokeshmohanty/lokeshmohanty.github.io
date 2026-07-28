@@ -46,6 +46,9 @@ These are load-bearing; `docs/decisions.md` has the full reasoning.
 6. **Don't `fetch` a relative URL in `createResource`.** It runs during SSR,
    where Node rejects the URL; the error is serialised and rethrown on
    hydration, killing the route. Use `onMount` for client-only fetches.
+7. **Head tags must use `@solidjs/meta` components** — `<Title>`, `<Meta>`,
+   `<Link>`. A lowercase `<link>`/`<meta>` inside the app renders in the *body*
+   and is silently ignored by crawlers and feed readers.
 
 ## Project skills
 
