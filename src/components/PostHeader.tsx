@@ -19,7 +19,7 @@ export default function PostHeader(props: {
     <>
       <PageMeta title={props.title} description={props.description} />
       <header class="mb-10 border-b border-rule pb-6 dark:border-rule-dark">
-        <h1 class="mb-3 font-serif text-3xl font-semibold tracking-tight text-balance">
+        <h1 class="mb-3 font-display text-3xl font-semibold tracking-tight text-balance">
           {props.title}
         </h1>
         <div class="not-prose flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted dark:text-muted-dark">

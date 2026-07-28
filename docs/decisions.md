@@ -103,6 +103,26 @@ Both this rule and the heading-anchor rule are deliberately **unlayered**: they
 must outrank Tailwind Typography's own utilities, and in the CSS cascade
 unlayered styles beat layered ones.
 
+## Fonts are self-hosted, and `--default-mono-font-family` is set by hand
+
+The three faces (Space Grotesk / Nunito / Cascadia Code) come from Fontsource
+variable packages rather than a Google Fonts `<link>`: no third-party request per
+visitor, offline dev works, Vite fingerprints the files, and Cascadia Code is not
+on Google Fonts at all. Each package's subsets carry a `unicode-range`, so a
+latin page downloads three woff2 files and ignores the rest.
+
+Tailwind's Preflight styles `code, kbd, samp, pre` from
+`var(--default-mono-font-family, ui-monospace, …)` and does **not** derive that
+variable from `--font-mono`. Without the explicit
+`--default-mono-font-family: var(--font-mono)` in `@theme`, every code block
+silently renders in the `ui-monospace` fallback while the theme block looks
+correct. Verify by reading `getComputedStyle(el).fontFamily` on a real `<code>`
+in a browser, not by reading `app.css`.
+
+Theme tokens are named `--font-display` / `--font-body` / `--font-mono` after
+their role. The previous names (`--font-serif` holding a serif for headings) went
+stale the moment the display face became a grotesque; role names do not.
+
 ## `check-build.mjs` exists because `failOnError` is not enough
 
 Nitro's `prerender.failOnError` only catches non-2xx responses. A component that

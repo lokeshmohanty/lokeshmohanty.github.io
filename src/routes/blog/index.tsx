@@ -13,7 +13,7 @@ export default function BlogIndex() {
       <PageMeta title="Blog" description="Research notes, technical posts and paper summaries." />
 
       <header class="not-prose mb-8">
-        <h1 class="font-serif text-3xl font-semibold tracking-tight">Blog</h1>
+        <h1 class="font-display text-3xl font-semibold tracking-tight">Blog</h1>
         <p class="mt-2 text-muted dark:text-muted-dark">
           Research notes, technical posts and paper summaries.
         </p>

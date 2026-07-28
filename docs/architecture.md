@@ -106,6 +106,22 @@ in `src/entry-server.tsx` before first paint to avoid a flash, and toggled by
 `Layout` wraps all page content in `Prose` (`@tailwindcss/typography`), so MDX
 pages get typography for free; list and search routes opt out with `not-prose`.
 
+### Type
+
+Three faces, one per role, self-hosted from Fontsource variable packages and
+`@import`ed at the top of `src/app.css`:
+
+| Token | Face | Used for |
+|---|---|---|
+| `--font-display` | Space Grotesk | headings, wordmark, post titles (`font-display`) |
+| `--font-body` | Nunito | running text — set on `body`, inherited everywhere |
+| `--font-mono` | Cascadia Code | labels, dates, counts, tags, code (`font-mono`) |
+
+Tokens are named for the role, not the classification — there is no
+`--font-serif`. `--font-sans` is aliased to `--font-body` so stray `font-sans`
+utilities cannot diverge, and `--default-mono-font-family` is set explicitly
+because Preflight does not derive it (see `docs/decisions.md`).
+
 Shiki emits both themes as CSS variables (`defaultColor: false`); `src/app.css`
 selects between `--shiki-light` and `--shiki-dark`.
 

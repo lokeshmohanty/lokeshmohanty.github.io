@@ -1,14 +1,37 @@
 @import "tailwindcss";
 @import "katex/dist/katex.min.css";
+
+/* Self-hosted variable fonts. Each package ships one @font-face per subset with
+   a unicode-range, so a latin-only page downloads only the latin file. Nunito
+   also pulls its italic axis — it carries the running text, where <em> is
+   common enough that synthesised obliques would show. */
+@import "@fontsource-variable/space-grotesk";
+@import "@fontsource-variable/nunito";
+@import "@fontsource-variable/nunito/wght-italic.css";
+@import "@fontsource-variable/cascadia-code";
+
 @plugin "@tailwindcss/typography";
 
 /* Dark mode is driven by a class on <html>, set before first paint. */
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-serif: "Source Serif 4", ui-serif, Georgia, Cambria, serif;
-  --font-mono: ui-monospace, "JetBrains Mono", "SFMono-Regular", Menlo, monospace;
+  /* Three roles, three faces. Display carries headings and the wordmark, body
+     carries running text, mono carries labels, dates, counts and code. Nothing
+     should reach for a face outside this set. */
+  --font-display: "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Nunito Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Cascadia Code Variable", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* `font-sans` is Tailwind's default for stray utilities and the typography
+     plugin's fallbacks; point it at the body face so it can't diverge. */
+  --font-sans: var(--font-body);
+
+  /* Preflight styles `code, kbd, samp, pre` from --default-mono-font-family,
+     which Tailwind does not emit on its own — without this line every code
+     block silently falls through to the ui-monospace fallback rather than the
+     mono face set above. */
+  --default-mono-font-family: var(--font-mono);
 
   /* Warm paper light theme, cool slate dark theme. */
   --color-paper: oklch(0.986 0.003 90);
@@ -33,7 +56,7 @@
   body {
     background-color: var(--color-paper);
     color: var(--color-ink);
-    font-family: var(--font-sans);
+    font-family: var(--font-body);
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
   }

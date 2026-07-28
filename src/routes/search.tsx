@@ -62,7 +62,7 @@ export default function Search() {
       <PageMeta title="Search" description="Search posts on this site." />
 
       <header class="not-prose mb-6">
-        <h1 class="font-serif text-3xl font-semibold tracking-tight">Search</h1>
+        <h1 class="font-display text-3xl font-semibold tracking-tight">Search</h1>
       </header>
 
       <div class="not-prose">
@@ -93,7 +93,7 @@ export default function Search() {
                 <li class="py-5">
                   <A href={post.href} class="group block">
                     <div class="flex flex-wrap items-baseline gap-x-3">
-                      <h2 class="font-serif text-lg font-medium group-hover:text-accent dark:group-hover:text-accent-dark">
+                      <h2 class="font-display text-lg font-medium group-hover:text-accent dark:group-hover:text-accent-dark">
                         {post.title}
                       </h2>
                       <Show when={post.date}>

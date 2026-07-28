@@ -22,7 +22,7 @@ export default function TagPage() {
         >
           ← All tags
         </A>
-        <h1 class="mt-2 font-serif text-3xl font-semibold tracking-tight">#{label()}</h1>
+        <h1 class="mt-2 font-display text-3xl font-semibold tracking-tight">#{label()}</h1>
       </header>
 
       <PostList posts={matching()} empty="No posts with this tag." />

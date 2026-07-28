@@ -31,7 +31,7 @@ export default function Layout(props: { children: JSX.Element }) {
         {/* Ordering keeps the toggle beside the title on narrow screens, with
             the nav reflowing onto its own row instead of stranding the toggle. */}
         <div class="mx-auto flex max-w-3xl flex-wrap items-center gap-x-6 gap-y-2 px-6 py-4">
-          <A href="/" class="order-1 mr-auto font-serif text-lg font-semibold tracking-tight">
+          <A href="/" class="order-1 mr-auto font-display text-lg font-semibold tracking-tight">
             {site.title}
           </A>
           <nav class="order-3 flex w-full flex-wrap items-center gap-x-5 gap-y-1 text-sm sm:order-2 sm:w-auto">

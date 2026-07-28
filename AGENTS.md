@@ -49,10 +49,16 @@ These are load-bearing; `docs/decisions.md` has the full reasoning.
 7. **Head tags must use `@solidjs/meta` components** — `<Title>`, `<Meta>`,
    `<Link>`. A lowercase `<link>`/`<meta>` inside the app renders in the *body*
    and is silently ignored by crawlers and feed readers.
+8. **Setting `--font-mono` is not enough for code.** Preflight reads
+   `--default-mono-font-family`, which Tailwind does not derive from it; both
+   must be set in `@theme` or every code block falls back to `ui-monospace`.
+   Type tokens are `--font-display` / `--font-body` / `--font-mono`.
 
 ## Project skills
 
 *(none yet — create with the `harness-ops` skill when durable knowledge accumulates)*
+
+Global `ui` skill (`~/.agents/skills/ui/`) owns the cross-project type roles.
 
 ## Binding rules
 

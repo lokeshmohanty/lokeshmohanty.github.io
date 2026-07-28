@@ -12,7 +12,7 @@ export default function TagsIndex() {
       <PageMeta title="Tags" description="Browse posts by topic." />
 
       <header class="not-prose mb-8">
-        <h1 class="font-serif text-3xl font-semibold tracking-tight">Tags</h1>
+        <h1 class="font-display text-3xl font-semibold tracking-tight">Tags</h1>
         <p class="mt-2 text-muted dark:text-muted-dark">Browse posts by topic.</p>
       </header>
 

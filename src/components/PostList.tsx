@@ -19,7 +19,7 @@ export default function PostList(props: { posts: Post[]; empty?: string }) {
             <li class="py-5">
               <A href={post.href} class="group block">
                 <div class="flex flex-wrap items-baseline gap-x-3">
-                  <h3 class="font-serif text-lg font-medium tracking-tight group-hover:text-accent dark:group-hover:text-accent-dark">
+                  <h3 class="font-display text-lg font-medium tracking-tight group-hover:text-accent dark:group-hover:text-accent-dark">
                     {post.title}
                   </h3>
                   <Show when={post.date}>
