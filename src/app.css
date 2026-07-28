@@ -49,6 +49,10 @@
 
 @layer base {
   html {
+    /* Base size for the whole page. A percentage rather than a px value so it
+       scales the reader's own browser default instead of overriding it — every
+       rem-based utility, and the typography plugin's scale, follows from here. */
+    font-size: 112.5%;
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
   }

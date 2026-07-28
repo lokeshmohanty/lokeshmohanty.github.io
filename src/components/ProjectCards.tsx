@@ -1,5 +1,5 @@
 import { A } from "@solidjs/router";
-import { For } from "solid-js";
+import { For, Show } from "solid-js";
 
 import type { FeaturedProject } from "~/lib/projects";
 
@@ -7,22 +7,31 @@ import type { FeaturedProject } from "~/lib/projects";
 export default function ProjectCards(props: {
   projects: readonly FeaturedProject[];
 }) {
+  // items-start, not the default stretch: cards no longer all carry a cover,
+  // so stretching a text card to match an image card beside it leaves a large
+  // empty panel below its content.
   return (
-    <ul class="not-prose mt-4 grid gap-6 sm:grid-cols-2">
+    <ul class="not-prose mt-4 grid items-start gap-6 sm:grid-cols-2">
       <For each={props.projects}>
         {(project) => (
           <li>
             <A
               href={`/projects/${project.slug}`}
-              class="group flex h-full flex-col overflow-hidden rounded-2xl border border-rule transition-colors hover:border-accent dark:border-rule-dark dark:hover:border-accent-dark"
+              class="group flex flex-col overflow-hidden rounded-2xl border border-rule transition-colors hover:border-accent dark:border-rule-dark dark:hover:border-accent-dark"
             >
-              <img
-                src={project.cover}
-                alt=""
-                width="600"
-                height="400"
-                class="aspect-[3/2] w-full object-cover"
-              />
+              {/* Only projects with a real image of their own get one; the rest
+                  are text cards rather than decorated with an invented cover. */}
+              <Show when={project.cover}>
+                {(cover) => (
+                  <img
+                    src={cover()}
+                    alt=""
+                    width="600"
+                    height="400"
+                    class="aspect-[3/2] w-full object-cover"
+                  />
+                )}
+              </Show>
               <div class="flex flex-1 flex-col p-5">
                 <p class="font-mono text-xs tracking-wider text-muted uppercase dark:text-muted-dark">
                   {project.period}

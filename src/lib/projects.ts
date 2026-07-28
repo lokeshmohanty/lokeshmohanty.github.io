@@ -16,7 +16,8 @@ export type FeaturedProject = {
   title: string;
   tagline: string;
   blurb: string;
-  cover: string;
+  /** Only when the project has a real image of its own; no covers are invented. */
+  cover?: string;
   affiliation: string;
   period: string;
   tags: readonly string[];
@@ -34,7 +35,6 @@ export const research: readonly FeaturedProject[] = [
     tagline: "Distributed synthetic data generation",
     blurb:
       "A distributed generator that produces synthetic training data by orchestrating multi-turn model conversations, then materialises each run as a reviewable candidate record for SFT and RLFT.",
-    cover: "/assets/project-dsdg.svg",
     affiliation: "ZenteiQ AiTech Innovations · IndiaAI Mission",
     period: "Mar 2026 – present",
     tags: ["LLM post-training", "Distributed systems", "JAX/TPU"],
@@ -45,7 +45,6 @@ export const research: readonly FeaturedProject[] = [
     tagline: "Combat aircraft engagement and strategic AI response",
     blurb:
       "A machine-learning framework for electronic support measures: detecting radar pulses, sorting them into emitters, classifying and localising those emitters, and fusing multiple sensors into one picture for the pilot.",
-    cover: "/assets/project-caesar.svg",
     affiliation: "Defence R&D Organisation (DRDO) — collaboration",
     period: "Mar 2024 – Mar 2026",
     tags: ["Electronic warfare", "Sensor fusion", "Real-time ML"],
@@ -56,7 +55,6 @@ export const research: readonly FeaturedProject[] = [
     tagline: "Scientific research and engineering excellence",
     blurb:
       "An open-source scientific ML framework in JAX, built jointly by the AiREX Lab at IISc and ZenteiQ, covering diffusion, training and transformer modules with reproducibility built in.",
-    cover: "/assets/project-scirex.svg",
     affiliation: "AiREX Lab, IISc · ZenteiQ · open source (Apache 2.0)",
     period: "2024 – present",
     tags: ["Open source", "JAX", "Scientific ML"],

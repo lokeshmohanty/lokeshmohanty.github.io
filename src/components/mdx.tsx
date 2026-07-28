@@ -4,16 +4,34 @@ import { Dynamic } from "solid-js/web";
 
 import Mermaid from "~/components/Mermaid";
 
-/** Internal links go through the router; external ones open in a new tab. */
+/**
+ * Internal links go through the router; external ones open in a new tab.
+ *
+ * A site-relative link to a *file* — `/assets/cv.pdf`, an image, a video — is
+ * not a route, and must not reach the router. A plain `<a>` is not enough:
+ * `Router` installs a global click handler that hijacks *every* same-origin
+ * anchor, so the click would still resolve to the 404 route and the file would
+ * never be fetched. The handler skips anchors carrying `target`, `download` or
+ * `rel="external"`, so file links get all three signals and open in a new tab.
+ * Routes on this site never carry a file extension.
+ */
+const FILE_HREF = /\.[a-z0-9]{2,5}(?:[?#]|$)/i;
+
 function MdxLink(props: JSX.AnchorHTMLAttributes<HTMLAnchorElement> & { href?: string }) {
   const href = props.href ?? "";
-  const internal = href.startsWith("/") && !href.startsWith("//");
+  const siteRelative = href.startsWith("/") && !href.startsWith("//");
+  const file = siteRelative && FILE_HREF.test(href);
 
-  if (internal) return <A href={href}>{props.children}</A>;
+  if (siteRelative && !file) return <A href={href}>{props.children}</A>;
 
-  const external = /^https?:\/\//.test(href);
+  const newTab = file || /^https?:\/\//.test(href);
   return (
-    <a {...props} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
+    <a
+      {...props}
+      {...(newTab
+        ? { target: "_blank", rel: file ? "noopener noreferrer external" : "noopener noreferrer" }
+        : {})}
+    >
       {props.children}
     </a>
   );

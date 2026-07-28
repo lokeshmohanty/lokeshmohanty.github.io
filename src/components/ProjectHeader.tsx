@@ -22,13 +22,17 @@ export default function ProjectHeader(props: { slug: string }) {
             ← Projects
           </A>
 
-          <img
-            src={p().cover}
-            alt=""
-            width="600"
-            height="400"
-            class="mt-4 aspect-[3/2] w-full rounded-2xl border border-rule object-cover dark:border-rule-dark"
-          />
+          <Show when={p().cover}>
+            {(cover) => (
+              <img
+                src={cover()}
+                alt=""
+                width="600"
+                height="400"
+                class="mt-4 aspect-[3/2] w-full rounded-2xl border border-rule object-cover dark:border-rule-dark"
+              />
+            )}
+          </Show>
 
           <h1 class="mt-6 font-display text-3xl font-semibold tracking-tight text-balance">
             {p().title}

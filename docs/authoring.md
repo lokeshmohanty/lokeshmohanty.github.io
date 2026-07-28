@@ -77,9 +77,11 @@ Projects are data plus a page, not just a page.
 3. Add `/projects/<slug>` to `prerender.routes` in `app.config.ts` and to
    `REQUIRED` in `scripts/check-build.mjs`.
 
-Covers are 3:2. The generated ones are hand-written SVGs in `public/assets/`
-on a `#151922 → #1e2534` panel with `#4f7ddb`/`#a9c6ff` linework; a real
-render should be composited onto the same panel so the grid reads as one set.
+`cover` is optional, and **only set it when the project has a real image of its
+own** — a render, a screenshot, a photograph. Do not invent artwork for a
+project that has none; those render as text cards, which is why the card grid
+uses `items-start` rather than stretching. Real covers are 3:2, composited onto
+a `#151922 → #1e2534` panel so the ones that exist read as a set.
 
 Smaller work that does not warrant a page goes in `other` in the same module
 and renders as a plain list under *Also* — no slug, no cover, no route.

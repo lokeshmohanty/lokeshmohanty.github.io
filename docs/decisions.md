@@ -103,6 +103,30 @@ Both this rule and the heading-anchor rule are deliberately **unlayered**: they
 must outrank Tailwind Typography's own utilities, and in the CSS cascade
 unlayered styles beat layered ones.
 
+## MDX links to files must escape the router
+
+`Router` installs a global click handler that hijacks **every** same-origin
+anchor on the page, not only the ones rendered by `<A>`. So a markdown link to
+`/assets/cv.pdf` was resolved as a route, matched nothing, and rendered the 404
+page — the PDF was never requested, even though it sits in the output and serves
+a clean `200 application/pdf`.
+
+Rendering a plain `<a>` is not a fix, because the handler does not care which
+component produced the anchor. It skips anchors carrying `target`, `download` or
+`rel="external"`, so `MdxLink` treats a site-relative href with a file extension
+as a file rather than a route and gives it all three. Routes on this site never
+carry an extension, which is what makes that test safe.
+
+Symptom to recognise: the URL changes to the asset path, the 404 route's JS
+chunk loads, and no network request is made for the file.
+
+## Projects without a real image get no image
+
+Covers are set only where a project genuinely has one — SimInhale's render,
+ExpMan's dashboard. Nothing is generated to fill a gap, so several cards are
+text-only by design. The card grid therefore uses `items-start`: stretching a
+text card to match an image card beside it leaves a large empty panel.
+
 ## Fonts are self-hosted, and `--default-mono-font-family` is set by hand
 
 The three faces (Space Grotesk / Nunito / Cascadia Code) come from Fontsource

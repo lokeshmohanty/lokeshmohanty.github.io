@@ -53,6 +53,10 @@ These are load-bearing; `docs/decisions.md` has the full reasoning.
    `--default-mono-font-family`, which Tailwind does not derive from it; both
    must be set in `@theme` or every code block falls back to `ui-monospace`.
    Type tokens are `--font-display` / `--font-body` / `--font-mono`.
+9. **A link to a file must escape the router.** `Router` hijacks every
+   same-origin anchor, so `/assets/cv.pdf` renders the 404 page instead of
+   fetching the file. `MdxLink` gives file hrefs `target`/`rel="external"`;
+   keep that, and never give a route a file extension.
 
 ## Project skills
 
