@@ -6,7 +6,7 @@ export const site = {
   author: {
     name: "Lokesh Mohanty",
     email: "lokeshm@iisc.ac.in",
-    avatar: "/assets/profile-pic.png",
+    avatar: "/assets/profile-pic.jpg",
     summary: "PhD researcher working on end-to-end planning for autonomous driving.",
     affiliation: "Indian Institute of Science, Bangalore",
   },

@@ -1,6 +1,6 @@
 ---
 title: About
-description: Education, experience, projects and open source contributions.
+description: Education, research, projects, experience and open source contributions.
 ---
 
 import PageMeta from "~/components/PageMeta";
@@ -9,40 +9,80 @@ import PageMeta from "~/components/PageMeta";
 
 # About
 
+Research engineer at the intersection of reinforcement learning and large-scale
+ML systems. My PhD research is a dual-process, reward-gated architecture for
+real-time test-time learning under non-stationarity, with provable guarantees.
+Alongside it I work on LLM pre- and post-training (SFT/RLFT) on TPU, distributed
+synthetic-data generation, and GPU-accelerated computing.
+
 ## Education
 
-**PhD, Engineering** · `2022 – present`
-Indian Institute of Science, Bangalore
+**PhD, Computational and Data Sciences** · `Aug 2022 – Jul 2027 (expected)` \
+Indian Institute of Science, Bengaluru \
+Advisor: Prof. Sashikumaar Ganesan · Reinforcement learning, LLM post-training
 
-**B.Tech, Mining Engineering** · `2015 – 2019`
+**B.Tech, Mining Engineering** · `Jul 2015 – Jun 2019` \
 Indian Institute of Technology, Kharagpur
 
-**Junior College** · `2013 – 2015`
-Sri Chaitanya Junior Kalasala
+## Research
 
-## Experience
+**A Dual-Process, Reward-Gated Architecture for Test-Time Learning** · `2024 – present` \
+PhD research, IISc — advised by Prof. Sashikumaar Ganesan
 
-**Software Engineer**, ARC Document Solutions · `Jul 2019 – Jul 2022`
-
-- Worked as a Node.js backend engineer.
-- Responsible for creation, management and deployment of applications.
-
-**Teaching Assistant**, CCE, IISc · `Jan 2023 – May 2023`
-
-- Course: Introduction to Computing for AI & ML
-
-**Teaching Assistant**, CCE, IISc · `Aug 2023 – Dec 2023`
-
-- Course: Practical AI & MLOps
+- Real-time test-time adaptation of RL policies under non-stationarity: a
+  fast-weight learner adapts continually while a deliberate controller escalates
+  only on environment-reward failures.
+- Reward-gated escalation via a drift-robust change detector (CUSUM), with
+  provable gate optimality and dynamic-regret guarantees.
+- Generator-free instantiation: a quality-diversity behavioural repertoire with
+  trust-region policy search and verify-before-commit.
 
 ## Projects
 
 A fuller write-up lives on the [projects page](/projects).
 
-1. Particle deposition in human lung airways.
-2. Semi-autonomous, gesture-controlled robot for finding a path in a maze.
-3. Uncovering the nucleus of large networks.
-4. Software to determine coal outsourcing price for e-reverse-auctioning.
+**DSDG: Distributed Synthetic Data Generation** · `Mar 2026 – present` \
+ZenteiQ AiTech Innovations — collaboration, IndiaAI Mission
+
+- Pre-trained LLMs on TPU using MaxText (JAX).
+- Built a scalable, distributed data-generation framework for SFT/RLFT over
+  FastAPI, Kafka and YugabyteDB, with Prometheus/Grafana observability.
+- Ran supervised (SFT) and RL (RLFT) fine-tuning; served inference with vLLM.
+
+**CAESAR: Combat Aircraft Engagement and Strategic AI Response** · `Mar 2024 – Mar 2026` \
+Defence R&D Organisation (DRDO) — collaboration
+
+- ML framework for end-to-end emitter detection, identification and multi-sensor
+  data fusion for enemy recognition.
+
+**SimInhale: Particle Deposition in Human Lung Airways** · `Sep 2022 – Mar 2023` \
+Indian Institute of Science
+
+- GPU-accelerated particle deposition; flow simulation with ParMooN (PDE solver),
+  parallelised with OpenMP and CUDA.
+
+## Experience
+
+**Software Engineer**, ARC Document Solutions, Kolkata · `Jul 2019 – Jul 2022`
+
+- Backend microservices in Node.js/TypeScript for a facility-management
+  platform, with S3 storage and OCR-based deep search.
+- Common IAM using OAuth2 and SAML, with Redis for caching.
+- CI/CD on AWS using Jenkins and Docker.
+
+**Teaching Assistant**, CCE, IISc · `Aug 2023 – Dec 2023`
+
+- Course: Practical AI & MLOps
+
+**Teaching Assistant**, CCE, IISc · `Jan 2023 – May 2023`
+
+- Course: Introduction to Computing for AI & ML
+
+## Skills
+
+- **Programming** — Python, C++, TypeScript/Node.js, Haskell
+- **ML & research** — PyTorch, JAX, reinforcement learning, LLM post-training, vLLM
+- **Systems & tools** — Docker, Kubernetes, Kafka, YugabyteDB, AWS/GCP, ClearML
 
 ## Open source contributions
 
@@ -60,7 +100,7 @@ A fuller write-up lives on the [projects page](/projects).
 ## Contact
 
 - **Email** — [lokeshm@iisc.ac.in](mailto:lokeshm@iisc.ac.in)
-- **Address** — IISc Bangalore, Karnataka, India 560012
+- **Address** — IISc Bengaluru, Karnataka, India 560012
 - **Languages** — English, Hindi, Odia, Telugu
 
-[View the full CV](/assets/portfolio.pdf) *(to be updated)*
+[View the full CV](/assets/cv.pdf)
