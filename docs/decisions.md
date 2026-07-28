@@ -120,12 +120,16 @@ carry an extension, which is what makes that test safe.
 Symptom to recognise: the URL changes to the asset path, the 404 route's JS
 chunk loads, and no network request is made for the file.
 
-## Projects without a real image get no image
+## Projects without a real image get no image, and cards carry none at all
 
 Covers are set only where a project genuinely has one — SimInhale's render,
-ExpMan's dashboard. Nothing is generated to fill a gap, so several cards are
-text-only by design. The card grid therefore uses `items-start`: stretching a
-text card to match an image card beside it leaves a large empty panel.
+ExpMan's dashboard. Nothing is generated to fill a gap.
+
+That left the card grid uneven: a card with a cover towered over the text card
+beside it, and neither stretching nor `items-start` made the row read as a set.
+So cards are text only, and `cover` is used solely by `ProjectHeader` on the
+detail page. With uniform cards the grid can stretch again, and `mt-auto` on the
+tag row lines the tags up across a row.
 
 ## Fonts are self-hosted, and `--default-mono-font-family` is set by hand
 

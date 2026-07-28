@@ -79,9 +79,10 @@ Projects are data plus a page, not just a page.
 
 `cover` is optional, and **only set it when the project has a real image of its
 own** — a render, a screenshot, a photograph. Do not invent artwork for a
-project that has none; those render as text cards, which is why the card grid
-uses `items-start` rather than stretching. Real covers are 3:2, composited onto
-a `#151922 → #1e2534` panel so the ones that exist read as a set.
+project that has none. It appears on the detail page only; the cards on
+`/projects` are text, so a project with an image never towers over one without.
+Real covers are 3:2, composited onto a `#151922 → #1e2534` panel so the ones
+that exist read as a set.
 
 Smaller work that does not warrant a page goes in `other` in the same module
 and renders as a plain list under *Also* — no slug, no cover, no route.
