@@ -60,9 +60,20 @@ These are load-bearing; `docs/decisions.md` has the full reasoning.
 
 ## Project skills
 
-*(none yet — create with the `harness-ops` skill when durable knowledge accumulates)*
+Invoke on demand; each carries its own `memory/`.
 
-Global `ui` skill (`~/.agents/skills/ui/`) owns the cross-project type roles.
+| Skill | Use when |
+|---|---|
+| `visual-post` | drafting, revising or reviewing a post — what a post must contain, its voice, choosing and building its figures, proving they render |
+| `ui` | touching `src/app.css`, component classes, `Prose`/Shiki/KaTeX styling, or any colour, face or dark-mode question |
+
+Both extend rather than restate global knowledge: the global `ui` skill
+(`~/.agents/skills/ui/`) owns the cross-project type roles and font traps.
+
+Skills here **update themselves**. Each ends with a binding capture-back step:
+corrections Lokesh gives while a skill is in play get written into that skill's
+`memory/` in the same session. The global `skill-memory-nudge` Stop hook fires
+when a session used a skill and wrote no memory.
 
 ## Binding rules
 

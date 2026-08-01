@@ -11,6 +11,11 @@ SolidStart, authored in MDX, deployed to GitHub Pages.
 - [Authoring content](authoring.md) — writing pages and posts
 - [Decisions](decisions.md) — why the stack looks the way it does
 
+Documentation covers the *mechanics*. Craft and taste live in the project skills
+under `.agents/skills/` and are invoked, not read cover to cover:
+`visual-post` (how a post should be written and illustrated) and `ui` (how the
+site should look). Each carries a `memory/` that grows every time it is used.
+
 ## At a glance
 
 | | |

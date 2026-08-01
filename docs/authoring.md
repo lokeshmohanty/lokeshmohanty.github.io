@@ -1,5 +1,10 @@
 # Authoring content
 
+This page is the mechanics — the commands, the frontmatter, the components.
+*How* a post should be written (what it must contain, its voice, which visual
+answers which question, how to prove the figures render) is the `visual-post`
+skill in `.agents/skills/visual-post/`. Invoke it before drafting.
+
 ## A new blog post
 
 ```bash
