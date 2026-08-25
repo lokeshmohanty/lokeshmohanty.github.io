@@ -50,7 +50,7 @@ design system.
 | File | Owns |
 |---|---|
 | `memory/tokens.md` | this site's colour tokens, dark-mode mechanism, and how they differ from the global palette |
-| `memory/prose-and-code.md` | the `Prose` container, Shiki dual-theme, heading anchors, overflow rules, base font size |
+| `memory/prose-and-code.md` | the `Prose` container, Shiki dual-theme, heading anchors, overflow rules, base font size, arrow/dingbat glyphs |
 
 Type stacks and the two Tailwind v4 font traps: [[typography]] (global).
 Figures and diagrams inside posts belong to the sibling `visual-post` skill.

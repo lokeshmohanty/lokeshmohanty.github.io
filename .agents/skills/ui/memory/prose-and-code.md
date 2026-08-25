@@ -58,3 +58,23 @@ back to `ui-monospace` while the `@theme` block still looks correct.
 **Why:** the content is the product here, so the prose container is the most
 load-bearing component on the site, and three of its rules only work because of
 where they sit relative to Tailwind's layers.
+
+## Arrow and dingbat glyphs
+
+**Never type a U+2XXX arrow or symbol into a component and expect a text
+glyph.** Built the external-link marker on `/opensource` as a literal `↗`
+(U+2197) on 2026-08-26; it resolved through the fallback stack to a colour
+*emoji* — a blue rounded box beside the repo name, in both themes, at every
+size. The face is doing nothing wrong: U+2197 has emoji presentation by
+default, and nothing in `--font-display` / `--font-body` covers it.
+
+Draw it instead. `RepoCards.tsx` has an inline `<svg>` with
+`stroke="currentColor"`, sized in `em` (`h-[0.72em] w-[0.72em]`) so it tracks
+the text it sits in, and `aria-hidden="true"` because the link text already
+says where it goes. `↗︎` (variation selector-15) would also work but
+depends on the fallback face honouring it, which is not checkable from the
+stylesheet.
+
+**Why:** an emoji glyph ignores `currentColor`, so it survives dark mode and
+hover unchanged and is the one thing on the page not in the palette — exactly
+what [[tokens]] rule 4 exists to prevent.
