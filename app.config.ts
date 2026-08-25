@@ -61,6 +61,7 @@ export default defineConfig({
         "/projects/expman",
         "/projects/scirex",
         "/projects/siminhale",
+        "/opensource",
         "/publications",
         "/blog",
         "/tags",

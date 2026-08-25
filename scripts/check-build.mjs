@@ -23,6 +23,7 @@ const REQUIRED = [
   "projects/expman/index.html",
   "projects/scirex/index.html",
   "projects/siminhale/index.html",
+  "opensource/index.html",
   "publications/index.html",
   "blog/index.html",
   "tags/index.html",

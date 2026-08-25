@@ -19,6 +19,7 @@ MDX files under `src/routes/` **are** routes — `extensions: ["mdx"]` in
 | `src/routes/blog/index.tsx` | `/blog` |
 | `src/routes/tags/[tag].tsx` | `/tags/:tag` |
 | `src/routes/projects/caesar.mdx` | `/projects/caesar` |
+| `src/routes/opensource.tsx` | `/opensource` |
 
 ### Projects
 
@@ -32,6 +33,21 @@ is an MDX route that renders `<ProjectHeader slug="…" />`, which reads the
 title, cover, period, affiliation and tags back out of the same module — the
 card and the page it links to cannot drift apart. See `docs/authoring.md` for
 how to add one.
+
+### Open source
+
+`/opensource` is a second card grid, driven by `src/lib/opensource.ts` and
+rendered by `RepoCards`. It lists public GitHub repositories and every card
+links out of the site, so unlike `/projects` there are no detail pages and no
+slugs. The list is hand-maintained rather than fetched: the page is prerendered
+to static HTML, so a GitHub API call would either not run at build time or
+would spend an unauthenticated rate limit on each visitor.
+
+A repo that also has a project page carries `project: "/projects/<slug>"`, and
+the card shows a *Write-up* link to it. That is why a card cannot be one big
+`<A>` the way a project card is — nested anchors are invalid HTML — so the repo
+name is the link and a stretched `::after` gives it the whole card as its hit
+area, with the secondary links in a `relative` footer that stacks above it.
 
 ### The MDX pipeline
 

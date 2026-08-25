@@ -87,6 +87,21 @@ that exist read as a set.
 Smaller work that does not warrant a page goes in `other` in the same module
 and renders as a plain list under *Also* — no slug, no cover, no route.
 
+## A new open-source repository
+
+Repos on `/opensource` are data only — one entry, no page.
+
+Add an entry to `repos` in `src/lib/opensource.ts`: `name`, `tagline`,
+`blurb`, `language` (the dominant one, shown as the eyebrow), `repo`, `tags`,
+and optionally `demo` (a live demo, docs or landing page), `project` (the path
+of a matching `/projects/<slug>` page) and `license`. Omit `license` when the
+repo ships no licence file rather than guessing one.
+
+Nothing else is needed — the route and its prerender entry already exist.
+Take the description and topics from the repo itself (`gh api
+repos/<owner>/<name>`) and edit them to the site's voice rather than writing
+new claims about the code.
+
 ## What you can write
 
 Standard GFM — tables, task lists, strikethrough, footnotes — plus:
