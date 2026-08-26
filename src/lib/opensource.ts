@@ -18,7 +18,7 @@ export type Repo = {
   /** Dominant language, shown as the card eyebrow. */
   language: string;
   repo: string;
-  /** Live demo, docs or landing page, when the repo publishes one. */
+  /** Live site, docs or landing page, when the repo publishes one; shown as *Site*. */
   demo?: string;
   /** Path of the matching `/projects/<slug>` page, when there is one. */
   project?: string;

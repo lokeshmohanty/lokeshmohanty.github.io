@@ -85,7 +85,7 @@ export default function RepoCards(props: { repos: readonly Repo[] }) {
                       rel="noopener"
                       class="text-accent hover:underline dark:text-accent-dark"
                     >
-                      Live demo
+                      Site
                       <ExternalArrow />
                     </a>
                   )}
@@ -96,7 +96,7 @@ export default function RepoCards(props: { repos: readonly Repo[] }) {
                       href={project()}
                       class="text-accent hover:underline dark:text-accent-dark"
                     >
-                      Write-up
+                      Articles
                     </A>
                   )}
                 </Show>

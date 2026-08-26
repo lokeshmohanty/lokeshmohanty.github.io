@@ -44,7 +44,7 @@ to static HTML, so a GitHub API call would either not run at build time or
 would spend an unauthenticated rate limit on each visitor.
 
 A repo that also has a project page carries `project: "/projects/<slug>"`, and
-the card shows a *Write-up* link to it. That is why a card cannot be one big
+the card shows an *Articles* link to it. That is why a card cannot be one big
 `<A>` the way a project card is — nested anchors are invalid HTML — so the repo
 name is the link and a stretched `::after` gives it the whole card as its hit
 area, with the secondary links in a `relative` footer that stacks above it.
